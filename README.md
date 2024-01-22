@@ -1,2 +1,2 @@
 # CV
-My own CV for finding job
+Проект для формирования PDF-файла резюме из Tex-файла.
