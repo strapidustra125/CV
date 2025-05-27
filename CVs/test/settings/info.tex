@@ -1,10 +1,84 @@
 % ------------------------------------------------------------------------------------------------ %
-% Файл с настройкой цветовой гаммы для документа
+%
+% Файл с настройкой заголовка - личной информации для шапки резюме
 %
 % ------------------------------------------------------------------------------------------------ %
 
 
-% Описание информации о кандидате
+% Описание информации о кандидате: эти команды-переменные используются только внутри этого файла
+% Снаружи используются только команды-функции
 
-\renewcommand{\varInfoName}{Человечек паучок}
+\newcommand{\varInfoName}           {Новиков Николай}
+\newcommand{\varInfoPosition}       {C++ developer}
+\newcommand{\varInfoEmail}          {}
+\newcommand{\varInfoTelegramURL}    {https://t.me/}
+\newcommand{\varInfoTelegramName}   {StrapiDuStra}
+\newcommand{\varInfoPhone}          {+7(904)243-56-47}
+\newcommand{\varInfoGithub}         {strapidustra125}
+\newcommand{\varInfoLocation}       {Саратов}
 
+\newcommand{\varInfoPhoto}          {photo/photo.png}
+
+% Команда-функция вывода имени кандидата (первая строка)
+\newcommand{\funcInfoSetName}
+{
+    \name{\varInfoName}
+}
+
+% Команда-функция вывода желаемой должности(ей), оно же - Tagline (вторая строка)
+\newcommand{\funcInfoSetPosition}
+{
+    \tagline{\varInfoPosition}
+}
+
+% Команда-функция вывода фотографий по бокам от блока информации со ссылками
+% Могут быть две фотографии - слева и/или справа от блока
+\newcommand{\funcInfoSetPhotos}
+{
+    % \photoL{2.8cm}{\varInfoPhoto}  % Левое фото
+    % \photoR{2.8cm}{\varInfoPhoto}  % Правое фото
+}
+
+% Команда-функция генерации блока информации под должностью и именем
+% Здесь выбираются нужные поля,а ненужные комментируются
+\newcommand{\funcInfoSetTopBlock}
+{
+    % Объявление пользовательских полей информации
+    % Например: \NewInfoField{telegram}{\faIcon{telegram}}[\varInfoTelegramURL]
+    % Где,
+    %   - первый параметр   - telegram              - имя, по которому функция будет вызываться
+    %   - второй параметр   - \faIcon{telegram}     - иконка из пакета fontawesome5
+    %   - блок []           - \varInfoTelegramURL   - Начало ссылки, к которой потом допишется PARAM
+    %
+    % Потом вызывается \telegram{PARAM}
+    % Появится иконка с именем, а при наведении будет выводиться конкатенация ссылки из [] и PARAM
+    %
+    %
+    % Или можно вызвать пользовательское поле одной строчкой:
+    % \printinfo{символ}{надпись}[префикс ссылки]
+
+    \NewInfoField{telegram}{\faIcon{telegram}}[\varInfoTelegramURL]
+
+    \personalinfo
+    {
+        % Необходимая информация
+
+        \email      {\varInfoEmail}
+        \telegram   {\varInfoTelegramName}
+        \location   {\varInfoLocation}
+
+        % Опциональная информация
+
+        \phone      {\varInfoPhone}
+        \github     {\varInfoGithub}
+
+        % Ненужная информация
+
+        % \mailaddress{Åddrésş, Street, 00000 Cóuntry}
+        % \orcid{0000-0000-0000-0000}
+        % \linkedin{your_id}
+        % \homepage{www.homepage.com}
+        % \twitter{@twitterhandle}
+        % \xtwitter{@x-handle}
+  }
+}
