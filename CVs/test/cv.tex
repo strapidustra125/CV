@@ -1,5 +1,9 @@
 % ------------------------------------------------------------------------------------------------ %
 %
+%   Для иконок используются пакеты:
+%       - fontawesome5 (http://texdoc.net/pkg/fontawesome5)
+%       - simpleicons  (http://texdoc.net/pkg/simpleicons)
+%
 % Важно: для компиляции используется строго "xelatex" !!!
 %
 % ------------------------------------------------------------------------------------------------ %
@@ -9,11 +13,9 @@
 %% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
 % \documentclass[10pt,a4paper,normalphoto]{altacv}
 
-\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
-%% AltaCV uses the fontawesome5 and simpleicons packages.
-%% See http://texdoc.net/pkg/fontawesome5 and http://texdoc.net/pkg/simpleicons for full list of symbols.
+\documentclass[10pt, a4paper, ragged2e, withhyper]{altacv}
 
-% Change the page layout if you need to
+% Изменение геометрии страницы: отступы
 \geometry{left=1.25cm, right=1.25cm, top=1.5cm, bottom=1.5cm, columnsep=1.2cm}
 
 % Пакет paracol позволяет набирать столбцы текста параллельно (т.е. бок о бок).
@@ -39,6 +41,11 @@
 
 \funcColorsSet
 
+
+% ------------------------------------------------------------------------------------------------ %
+% Тут можно выбрать любой размер шрифта всех перечислений в документе: от \tiny до \Huge
+% По умолчанию: \normalsize
+\AtBeginEnvironment{itemize}{\normalsize}
 
 
 % Change the bullets for itemize and rating marker
@@ -72,6 +79,8 @@
 %% sample.bib contains your publications
 \addbibresource{sample.bib}
 
+
+
 \begin{document}
 
     % Генерация блоков резюме по отдельности
@@ -87,8 +96,17 @@
 
     \makecvheader           % Функция генерации заголовка: без нее заголовка не будет вообще
 
-    %% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
-    \AtBeginEnvironment{itemize}{\small}
+
+
+
+
+
+
+
+
+
+
+
 
     %% Set the left/right column width ratio to 6:4.
     \columnratio{0.6}
