@@ -98,10 +98,38 @@
 
   \renewcommand{\familydefault}{\rmdefault}
 
-  % Настройка шрифтов для конкретных полей
+  % Настройка размера шрифтов для конкретных полей
+  %
+  % | Команда         | Относительный размер | Описание                                |
+  % | --------------- | -------------------- | --------------------------------------- |
+  % | \tiny           | Очень маленький      | Самый мелкий размер                     |
+  % | \scriptsize     | Очень маленький      | Чаще всего для подписей под формулами   |
+  % | \footnotesize   | Маленький            | Для сносок, подвалов, мелких деталей    |
+  % | \small          | Чуть меньше обычного | Используется для второстепенного текста |
+  % | \normalsize     | Обычный размер       | Размер по умолчанию                     |
+  % | \large          | Чуть больше обычного | Для выделения, но не заголовков         |
+  % | \Large          | Ещё больше           | Часто используется в заголовках         |
+  % | \LARGE          | Большой              | Подзаголовки или крупный текст          |
+  % | \huge           | Очень большой        | Реже используется, например в титуле    |
+  % | \Huge           | Самый большой        | Максимальный стандартный размер         |
 
-  \renewcommand{\namefont}{\huge\rmfamily\bfseries}         % Имя кандидата
-  \renewcommand{\personalinfofont}{\footnotesize}           %
-  \renewcommand{\cvsectionfont}{\LARGE\rmfamily\bfseries}   % Заголовки секций резюме
-  \renewcommand{\cvsubsectionfont}{\large\bfseries}         %
+  % Настройка стиля шрифтов
+  %
+  % | Команда     | Что делает (весь текст после неё) |
+  % | ----------- | --------------------------------- |
+  % | \rmfamily   | Шрифт с засечками                 |
+  % | \sffamily   | Без засечек                       |
+  % | \ttfamily   | Моноширинный                      |
+  % | \bfseries   | Жирный                            |
+  % | \mdseries   | Обычный вес (medium)              |
+  % | \itshape    | Курсив                            |
+  % | \slshape    | Наклонный (slanted)               |
+  % | \scshape    | Малые заглавные                   |
+  % | \upshape    | Вертикальный, не наклонный текст  |
+
+
+  \renewcommand{\namefont}        {\huge\rmfamily\bfseries}   % Имя кандидата
+  \renewcommand{\personalinfofont}{\footnotesize}             % Инфо кандидата: телефон, почта и т.д.
+  \renewcommand{\cvsectionfont}   {\LARGE\rmfamily\bfseries}  % Заголовки секций резюме
+  \renewcommand{\cvsubsectionfont}{\large\bfseries}           %
 }

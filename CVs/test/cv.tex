@@ -21,34 +21,22 @@
 
 
 % ------------------------------------------------------------------------------------------------ %
-% Настройка шрифтов
+% Подключение файлов с настройками
 
-% Подключение файла с настройками
-\input{settings/fonts}
+\input{settings/fonts}    % Подключение файла с настройками шрифтов
+\input{settings/colors}   % Подключение файла с настройками цветов
 
-% Вызов функции настройки шрифтов для всего документа
+
+% ------------------------------------------------------------------------------------------------ %
+% Настройка шрифтов для всего документа
+
 \funcFontsSet
 
 
+% ------------------------------------------------------------------------------------------------ %
+% Настройка цветовой гаммы для всего документа
 
-
-
-
-% Change the colours if you want to
-\definecolor{SlateGrey}{HTML}{2E2E2E}
-\definecolor{LightGrey}{HTML}{666666}
-\definecolor{DarkPastelRed}{HTML}{450808}
-\definecolor{PastelRed}{HTML}{8F0D0D}
-\definecolor{GoldenEarth}{HTML}{E7D192}
-\colorlet{name}{black}
-\colorlet{tagline}{PastelRed}
-\colorlet{heading}{DarkPastelRed}
-\colorlet{headingrule}{GoldenEarth}
-\colorlet{subheading}{PastelRed}
-\colorlet{accent}{PastelRed}
-\colorlet{emphasis}{SlateGrey}
-\colorlet{body}{LightGrey}
-
+\funcColorsSet
 
 
 
