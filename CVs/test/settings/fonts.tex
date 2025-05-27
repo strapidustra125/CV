@@ -1,0 +1,107 @@
+% ------------------------------------------------------------------------------------------------ %
+% Файл с настройкой шрифтов для документа
+% Шрифты берутся из отдельной директории
+% ------------------------------------------------------------------------------------------------ %
+
+% Пакет для работы со шрифтами
+\usepackage{fontspec}
+
+% Команды-переменные для хранения названия единственного шрифта для всего документа
+
+\newcommand{\varFontsGlobal}{PT Sans}
+\newcommand{\varFontsGlobalSystemName}{PT_Sans-Web}
+
+% Команды-переменные для основного шрифта для всего документа: латиница, цифры, символы
+
+\newcommand{\varFontsMain}{\varFontsGlobal}
+\newcommand{\varFontsMainSystemName}{\varFontsGlobalSystemName}
+
+% Команды-переменные для шрифта без засечек
+
+\newcommand{\varFontsSans}{\varFontsGlobal}
+\newcommand{\varFontsSansSystemName}{\varFontsGlobalSystemName}
+
+% Команды-переменные для символов кириллицы
+
+\newcommand{\varFontsCyrillic}{\varFontsGlobal}
+\newcommand{\varFontsCyrillicSystemName}{\varFontsGlobalSystemName}
+
+% Команды-переменные для файлов шрифтов
+
+\newcommand{\varFontsDirectory}{../../fonts/}
+\newcommand{\varFontsExtension}{.ttf}
+
+
+% Команда-функция настройки основного шрифта
+\newcommand{\funcFontsSetMain}[4]
+{
+  % Установка основного шрифта
+  \setmainfont{#1}                % Название основного шрифта (может не совпадать с именем в файловой системе) (параметр 1)
+  [
+    Path=#2,                      % Путь до директории файла шрифта (параметр 2)
+    Extension=#3,                 % Расширение файла шрифта с точкой (параметр 3)
+    UprightFont=#4,               % Имя шрифта в файловой системе без расширения (параметр 4)
+    BoldFont=#4-Bold,             % Имя жирного шрифта
+    ItalicFont=#4-Italic,         % Имя наклонного шрифта
+    BoldItalicFont=#4-BoldItalic  % Имя жирно-наклонного шрифта
+  ]
+}
+
+% Команда-функция настройки шрифта без засечек
+\newcommand{\funcFontsSetSans}[4]
+{
+  % Установка основного шрифта без засечек
+  \setsansfont{#1}                % Название основного шрифта (может не совпадать с именем в файловой системе) (параметр 1)
+  [
+    Path=#2,                      % Путь до директории файла шрифта (параметр 2)
+    Extension=#3,                 % Расширение файла шрифта с точкой (параметр 3)
+    UprightFont=#4,               % Имя шрифта в файловой системе без расширения (параметр 4)
+    BoldFont=#4-Bold,             % Имя жирного шрифта
+    ItalicFont=#4-Italic,         % Имя наклонного шрифта
+    BoldItalicFont=#4-BoldItalic  % Имя жирно-наклонного шрифта
+  ]
+}
+
+% Команда-функция настройки шрифта кириллицы
+\newcommand{\funcFontsSetCyrillic}[4]
+{
+  % Установка основного шрифта для кириллицы
+  \newfontfamily\cyrillicfont{#1} % Название основного шрифта (может не совпадать с именем в файловой системе) (параметр 1)
+  [
+    Path=#2,                      % Путь до директории файла шрифта (параметр 2)
+    Extension=#3,                 % Расширение файла шрифта с точкой (параметр 3)
+    UprightFont=#4,               % Имя шрифта в файловой системе без расширения (параметр 4)
+    BoldFont=#4-Bold,             % Имя жирного шрифта
+    ItalicFont=#4-Italic,         % Имя наклонного шрифта
+    BoldItalicFont=#4-BoldItalic  % Имя жирно-наклонного шрифта
+  ]
+}
+
+% Основная команда-функция для настройки всех шрифтов документа
+\newcommand{\funcFontsSet}
+{
+  \usepackage{polyglossia}
+
+  \setmainlanguage{russian}
+  \setotherlanguage{english}
+
+  % Настройка шрифтов: основной, без засечек и кириллицу
+
+  \funcFontsSetMain{\varFontsMain}{\varFontsDirectory}{\varFontsExtension}{\varFontsMainSystemName}
+  \funcFontsSetSans{\varFontsSans}{\varFontsDirectory}{\varFontsExtension}{\varFontsSansSystemName}
+  \funcFontsSetCyrillic{\varFontsCyrillic}{\varFontsDirectory}{\varFontsExtension}{\varFontsCyrillicSystemName}
+
+  % Выбор шрифта по умолчанию:
+  %  - \rmdefault - с засечками (serif)         - Roman
+  %  - \sfdefault - без засечек (sans-serif)    - Sans-serif
+  %  - \ttdefault - моноширинный (typewriter)   - Teletype
+
+  \renewcommand{\familydefault}{\rmdefault}
+
+  % Настройка шрифтов для конкретных полей
+
+  \renewcommand{\namefont}{\huge\rmfamily\bfseries}         % Имя кандидата
+  \renewcommand{\personalinfofont}{\footnotesize}           %
+  \renewcommand{\cvsectionfont}{\LARGE\rmfamily\bfseries}   % Заголовки секций резюме
+  \renewcommand{\cvsubsectionfont}{\large\bfseries}         %
+}

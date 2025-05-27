@@ -1,3 +1,11 @@
+% ------------------------------------------------------------------------------------------------ %
+%
+% Важно: для компиляции используется строго "xelatex" !!!
+%
+% ------------------------------------------------------------------------------------------------ %
+% Настройка параметров документа
+
+
 %% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
 % \documentclass[10pt,a4paper,normalphoto]{altacv}
 
@@ -6,32 +14,25 @@
 %% See http://texdoc.net/pkg/fontawesome5 and http://texdoc.net/pkg/simpleicons for full list of symbols.
 
 % Change the page layout if you need to
-\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
+\geometry{left=1.25cm, right=1.25cm, top=1.5cm, bottom=1.5cm, columnsep=1.2cm}
 
-% The paracol package lets you typeset columns of text in parallel
+% Пакет paracol позволяет набирать столбцы текста параллельно (т.е. бок о бок).
 \usepackage{paracol}
 
-% Change the font if you want to, depending on whether
-% you're using pdflatex or xelatex/lualatex
-% WHEN COMPILING WITH XELATEX PLEASE USE
-% xelatex -shell-escape -output-driver="xdvipdfmx -z 0" sample.tex
-\iftutex
-  % If using xelatex or lualatex:
-  \setmainfont{DejaVu Serif}
-  \setsansfont{DejaVu Serif}
-  \renewcommand{\familydefault}{\sfdefault}
-\else
-  % If using pdflatex:
-  \usepackage[rm]{roboto}
-  \usepackage[defaultsans]{lato}
-  % \usepackage{sourcesanspro}
-  \renewcommand{\familydefault}{\sfdefault}
-\fi
 
-\usepackage{polyglossia}
-\setmainlanguage{russian}
-\setotherlanguage{english}
-\newfontfamily\russianfont{DejaVu Serif} % или другой шрифт с кириллицей
+% ------------------------------------------------------------------------------------------------ %
+% Настройка шрифтов
+
+% Подключение файла с настройками
+\input{settings/fonts}
+
+% Вызов функции настройки шрифтов для всего документа
+\funcFontsSet
+
+
+
+
+
 
 % Change the colours if you want to
 \definecolor{SlateGrey}{HTML}{2E2E2E}
@@ -48,11 +49,7 @@
 \colorlet{emphasis}{SlateGrey}
 \colorlet{body}{LightGrey}
 
-% Change some fonts, if necessary
-\renewcommand{\namefont}{\Huge\rmfamily\bfseries}
-\renewcommand{\personalinfofont}{\footnotesize}
-\renewcommand{\cvsectionfont}{\LARGE\rmfamily\bfseries}
-\renewcommand{\cvsubsectionfont}{\large\bfseries}
+
 
 
 % Change the bullets for itemize and rating marker
@@ -88,7 +85,7 @@
 
 \begin{document}
 
-  \name{Николай Новиков}
+  \name{Человечек паучок}
   \tagline{Your Position or Tagline Here}
   %% You can add multiple photos on the left or right
   \photoR{2.8cm}{Globe_High}
