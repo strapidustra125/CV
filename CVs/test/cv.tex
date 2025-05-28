@@ -38,17 +38,18 @@
 
 % Персональные данные
 
-\input{settings/personal/achievements.cfg.tex}          % Достижения
+\input{settings/personal/about.cfg.tex}             %
+\input{settings/personal/achievements.cfg.tex}      % Достижения
 \input{settings/personal/day.cfg.tex}               % Диаграмма дня
 \input{settings/personal/education.cfg.tex}         % Образованием
 \input{settings/personal/experience.cfg.tex}        % Опыт работы
 \input{settings/personal/header.cfg.tex}            % Заголовок с личной информацией
-\input{settings/personal/languages.cfg.tex}                % Языки
-\input{settings/personal/philosophy.cfg.tex}                % Цитата
+\input{settings/personal/languages.cfg.tex}         % Языки
+\input{settings/personal/philosophy.cfg.tex}        % Цитата
 \input{settings/personal/projects.cfg.tex}          % Проекты
 \input{settings/personal/pubs.cfg.tex}              % Публикации
-\input{settings/personal/referees.cfg.tex}                % Рекомендатели
-\input{settings/personal/skills.cfg.tex}                % Навыки
+\input{settings/personal/referees.cfg.tex}          % Рекомендатели
+\input{settings/personal/skills.cfg.tex}            % Навыки
 
 
 % ------------------------------------------------------------------------------------------------ %
@@ -97,19 +98,19 @@
         % 2. Секция опыта - Компании, должности и результаты работы
         %    Берется из файла settings/personal/experience.cfg.tex
 
-        \funcExperiencePrint
-        \funcProjectsPrint
+        \funcExperiencePrint        % Опыт работы
+
+        \funcEducationPrint         % Образование
+
+
+
 
 
         \medskip
 
-        \funcDayPrint
 
-        % use ONLY \newpage if you want to force a page break for
-        % ONLY the current column
         \newpage
 
-        \funcPubsPrint
 
         %% Switch to the right column. This will now automatically move to the second
         %% page if the content is too long.
@@ -118,6 +119,7 @@
 
         % % % % % % Вторая колонка (правая) % % % % % %
 
+        \funcAboutPrint
 
         \funcPhilosophyPrint
 
@@ -129,21 +131,19 @@
 
         \funcLanguagesPrint
 
-        %% Yeah I didn't spend too much time making all the spacing consistent... sorry. Use \smallskip, \medskip, \bigskip, \vspace etc to make adjustments.
-        \medskip
 
 
-
-        % ---------------------------------------------------------------------------------------- %
-        % Секция образования
-        %
-        \funcEducationPrint
-
-
-        % \divider
 
 
         \funcRefereesPrint
+
+        % ---------------------------------------------------------------------------------------- %
+        % Есть но не используется
+
+        % \funcDayPrint               % Диаграмма дня
+        % \funcProjectsPrint          % Проекты
+        % \funcPubsPrint              % Публикации
+
 
     \end{paracol}
 
