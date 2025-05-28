@@ -42,7 +42,8 @@
 \RequirePackage{xcolor}
 %% v1.3.2 Hopefully this helps make the PDF
 %% file more 'friendly' with copy-paste etc
-\RequirePackage[a-1b]{pdfx}
+\usepackage{hyperref}  % должен быть ПЕРЕД pdfx
+% \RequirePackage[a-1b]{pdfx}
 \RequirePackage{accsupp}
 %% v1.7.3 Avoid 'Token not allowed' when \\ used with accsupp
 \pdfstringdefDisableCommands{
@@ -70,7 +71,7 @@
     \ifluatex\tutextrue\else\tutexfalse\fi
   \fi
 }{}
-\iftutex 
+\iftutex
   \RequirePackage{fontspec}
 \else
   %% v1.3.2 attempts to make ligatures
@@ -157,7 +158,7 @@
 %% v1.6: Use accsupp so that when copying/pasting the icon from PDF to a text
 %%       file, the icon name is pasted
 %% v1.7: Some tweaks/corrections so that accsupp is for icons only
-%% v1.7.1: Bugfix to support some symbol commands e.g. academicons commands 
+%% v1.7.1: Bugfix to support some symbol commands e.g. academicons commands
 \ExplSyntaxOn
 \NewDocumentCommand{\printinfo}{m m o}{%
   \IfNoValueTF{#3}{%
@@ -471,7 +472,7 @@
     }%
     \iftoggle{boldname}{\textbf{##1}}{##1}%
   }%
-% 
+%
   \renewcommand*{\mkbibnamegiven}[1]{%
     \global\togglefalse{boldname}%
     \foreach \my@fname / \my@gname in \my@namelist{%

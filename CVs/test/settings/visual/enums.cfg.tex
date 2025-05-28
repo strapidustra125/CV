@@ -1,0 +1,40 @@
+% ------------------------------------------------------------------------------------------------ %
+%
+% Файл с настройкой перечислений и маркеров
+%
+% ------------------------------------------------------------------------------------------------ %
+
+
+
+% Команда-метод настройки перечислений и маркеров
+\newcommand{\funcEnumsConfig}
+{
+
+    % Тут можно выбрать любой размер шрифта всех перечислений в документе: от \tiny до \Huge
+    % По умолчанию: \normalsize
+    \AtBeginEnvironment{itemize}{\normalsize}
+
+
+    % Настройка маркеров
+
+    % Размер и стиль маркеров для всех перечислений в документе
+    %
+    % Размер:
+    %   от \tiny до \Huge
+    % Стиль:
+    %   \textbullet             - Классическая пуля
+    %   \textendash	            - Короткое тире
+    %   \textasteriskcentered   - Центрированная звёздочка
+    %   \textperiodcentered     - Маленькая точка
+    %   \textbf{--}             - Жирное тире (ручной вариант)
+    \renewcommand{\cvItemMarker}{{\small\textbullet}}
+
+    % Маркеры для \cvskill (Секция "Навыки или ""Языки")
+    \renewcommand{\cvRatingMarker}{\faCircle}
+
+    % Маркер для поля "дата" в \cvevent
+    \renewcommand{\cvDateMarker}{\faCalendar*[regular]}
+
+    % Маркер для поля "локация" в \cvevent
+    \renewcommand{\cvLocationMarker}{\faMapMarker*}
+}
