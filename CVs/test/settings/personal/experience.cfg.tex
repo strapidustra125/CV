@@ -7,8 +7,184 @@
 \newcommand{\varExperienceJobUrlSez}        {https://zaprib.ru/}
 \newcommand{\varExperienceJobUrlSsu}        {https://www.sgu.ru/}
 \newcommand{\varExperienceJobUrlTtm}        {https://transtelematica.ru/}
+\newcommand{\varExperienceJobUrlTtmMnt}     {https://transtelematica.ru/projects/programmnoe-obespechenie/programmnoe-obespechenie-MNT/}
 
 
+
+\newcommand{\funcExperienceTechnology}[1]
+{
+    \textbf{Стек:} #1
+}
+
+
+\newcommand{\funcExperienceTtmDefinition}
+{
+    В рамках проекта \href{\varExperienceJobUrlTtmMnt}{\underline{навигационного терминала}} для
+    общественного транспорта разработка Linux сервисов, взаимодействующих по шине ZeroMQ
+    посредством Protobuf.
+}
+
+
+% СЭЗ Орджоникидзе
+\newcommand{\funcExperienceSez}
+{
+    \cvevent
+        {Junior C/C++ developer}
+        {
+            \href
+                {\varExperienceJobUrlSez}
+                {ОАО СЭЗ им. Серго Орджоникидзе}
+        }
+        {Октябрь 2019 -- Октябрь 2021 (2 года)}
+        {г. Саратов}
+
+    Embedded разработка системы дистанционной управления (СДУ) под ARM.
+    Разработка консольных приложений под Linux.
+
+    \begin{itemize}
+
+        \item
+            Разработал на языке C под STM32 прототип СДУ из 4-х ZigBee устройств для
+            кран-балки самолета АН-124.
+
+        \item
+            Разработал на языке С++ для Ubuntu сниффер для отладки протокола ZigBee через
+            UART.
+
+    \end{itemize}
+
+    \funcExperienceTechnology
+    {
+        C, C++,
+        make,
+        STM32, UART, ZigBee,
+        Linux, Git.
+    }
+}
+
+
+% СГУ - Грант
+\newcommand{\funcExperienceSsu}
+{
+    \cvevent
+        {C++ developer}
+        {
+            \href
+                {\varExperienceJobUrlSsu}
+                {Саратовский государственный университет им. Н.Г. Чернышевского}
+        }
+        {Январь 2023 -- Январь 2025 (2 года)}
+        {г. Саратов}
+
+    Разработка в рамках научного гранта приложения по решению диф. ур., описывающей поведение
+    графена в электрическом поле.
+
+    \begin{itemize}
+
+        \item
+            Разработал консольное OpenMPI приложение под Linux для кластерных вычислений решения
+            системы диф. ур.
+
+        \item
+            Увеличил производительность приложения на 40\% по сравнению с версией на языке C,
+            написанной до меня, за счет архитектурной оптимизации параллельной части приложения.
+
+    \end{itemize}
+
+    Приложение запускалось на 256 ядрах кластера и обладало системой мониторинга производительности.
+
+    \funcExperienceTechnology
+    {
+        C++14,
+        CMake,
+        boost, mpich, jsoncpp,
+        SLURM,
+        Bash, Git, Linux.
+    }
+}
+
+
+%
+\newcommand{\funcExperienceTtmJunior}
+{
+    \cvevent
+        {Junior C/C++ developer}
+        {
+            \href
+                {\varExperienceJobUrlTtm}
+                {Сервисный центр Транстелематика}
+        }
+        {Октябрь 2021 -- Апрель 2023 (1 год 6 месяцев)}
+        {г. Саратов}
+
+    \funcExperienceTtmDefinition
+
+    \begin{itemize}
+
+        \item
+            Переписал сервис информирования пассажиров с ограниченными возможностями
+            с QT на C++14 с использованием modbus (RS-485). Покрыл Unit-тестами.
+
+        \item
+            Переписал с использованием TDD многопоточный сервис обновления контента ТС с QT на
+            C++14. Реализовал алгоритм HTTP скачивания контента по чанкам для условий плохого GSM
+            соединения.
+
+    \end{itemize}
+
+    \funcExperienceTechnology
+    {
+        C++14,                              % Языки
+        GTest, QT                           % Фреймворки
+        CMake,                              % Сборка
+        Protobuf, ZeroMQ, HTTP, modbus,     % Протоколы
+        Git,
+        Bash, Linux.                        % Окружение
+    }
+}
+
+%
+\newcommand{\funcExperienceTtmMiddle}
+{
+    \cvevent
+        {Middle C/C++ developer}
+        {
+            \href
+                {\varExperienceJobUrlTtm}
+                {Сервисный центр Транстелематика}
+        }
+        {Апрель 2023 -- \textbf{сейчас} (2 года 2 месяца)}       % Сейчас = июнь 2025
+        {г. Саратов}
+
+    \funcExperienceTtmDefinition
+
+    \begin{itemize}
+
+        \item
+            Разработал для сервиса информирования пассажиров с ограниченными возможностями
+            взаимодействие с радио информаторами по Ethernet с использованием Protobuf.
+
+        \item
+            Разработал для сервиса обновления контента ТС режим master-slave-slave для 3-х
+            вагонного трамвая с использованием FTP и гарантированной синхронизацией контента.
+
+        \item
+            Разработал для сервиса мониторинга оплаты проезда взаимодействие c валидаторами ТС по
+            протоколу JsonRPC.
+
+    \end{itemize}
+
+    \funcExperienceTechnology
+    {
+        C++14, C++17, Python,                                       % Языки
+        STL, boost,                                                 % Фреймворки
+        CMake,                                                      % Сборка
+        Protobuf, ZeroMQ, HTTP, RS485, Ethernet, FTP, JsonRPC       % Протоколы
+        sqlite,
+        Git,
+        Bash, Linux.                                                % Окружение
+    }
+}
 
 %
 \newcommand{\funcExperiencePrint}
@@ -25,52 +201,17 @@
     % В itemize перечисляются задачи/успехи
 
 
-    % -------------------------------------------------------------------------------------------- %
-    % 1. C/C++ developer на СЭЗ
-
-    \cvevent
-        {C/C++ developer}
-        {\href{\varExperienceJobUrlSez}{ОАО СЭЗ им. Серго Орджоникидзе}}
-        {Октябрь 2019 -- Октябрь 2021 (2 года)}
-        {г. Саратов}
-
-    \begin{itemize}
-
-        \item Job description 1
-
-    \end{itemize}
+    \funcExperienceSez          % C/C++ developer на СЭЗ
 
     \divider
 
-    % -------------------------------------------------------------------------------------------- %
-    % 2. C++ developer в СГУ
-
-    \cvevent
-        {C++ developer}
-        {\href{\varExperienceJobUrlSsu}{Саратовский государственный университет \\им. Н.Г. Чернышевского}}
-        {Январь 2023 -- Январь 2025 (2 года)}
-        {г. Саратов}
-
-    \begin{itemize}
-
-        \item Job description 1
-
-    \end{itemize}
+    \funcExperienceSsu          % C++ developer в СГУ
 
     \divider
 
-    % -------------------------------------------------------------------------------------------- %
-    % 3. C/C++ developer в СЦ ТТМ
+    \funcExperienceTtmJunior    % Junior C/C++ developer в СЦ ТТМ
 
-    \cvevent
-        {C/C++ developer}
-        {\href{\varExperienceJobUrlTtm}{Сервисный центр Транстелематика}}
-        {Октябрь 2021 -- сейчас (3 года 8 месяцев)}
-        {г. Саратов}
+    \divider
 
-    \begin{itemize}
-
-        \item Job description 1
-
-    \end{itemize}
+    \funcExperienceTtmMiddle    % Middle C/C++ developer в СЦ ТТМ
 }
