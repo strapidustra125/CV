@@ -287,19 +287,20 @@
 \newcommand{\cvsectionfont}{\LARGE\bfseries}
 \newcommand{\cvsubsectionfont}{\large\bfseries}
 
-\newcommand{\makecvheader}{%
-  \begingroup
-    \altacv@left@photos\hfill%
-    \begin{minipage}{\dimexpr\linewidth-\altacv@photos@width}%
-    \raggedright%
-    {\namefont\color{name}\MakeUppercase{\@name}\par}
-    \medskip
-    {\taglinefont\color{tagline}\@tagline\par}
-    \medskip
-    {\personalinfofont\@personalinfo\par}
-    \end{minipage}\hfill%
-    \altacv@right@photos\par%
-  \endgroup\medskip
+\newcommand{\makecvheader}
+{%
+    \begingroup
+        \altacv@left@photos\hfill%
+        \begin{minipage}{\dimexpr\linewidth-\altacv@photos@width}%
+            \raggedright%
+            {\namefont\color{name}\MakeUppercase{\@name}\par}
+            \medskip
+            {\taglinefont\color{tagline}\@tagline\par}
+            \medskip
+            {\personalinfofont\@personalinfo\par}
+        \end{minipage}\hfill%
+        \altacv@right@photos\par%
+    \endgroup\smallskip
 }
 
 \renewenvironment{quote}{\color{accent}\itshape\large}{\par}
