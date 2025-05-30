@@ -79,7 +79,7 @@
     % Установить соотношение ширины левой и правой колонок
     % 0.6 - левая:правая = 6:4
     % 0.7 - левая:правая = 7:3
-    \columnratio{0.7}
+    \columnratio{0.6}
 
     % Режим двух колонок с авто переносом на следующую страницу для каждой колонки
     \begin{paracol}{2}
@@ -94,42 +94,26 @@
 
         % % % % % % Первая колонка (левая) % % % % % %
 
-        % ---------------------------------------------------------------------------------------- %
-        % 2. Секция опыта - Компании, должности и результаты работы
-        %    Берется из файла settings/personal/experience.cfg.tex
 
-        \funcExperiencePrint        % Опыт работы
-
-        \funcEducationPrint         % Образование
-
-
-
-
+        \funcExperiencePrint        % Секция: Опыт работы
 
         \medskip
 
-
-        \newpage
-
-
-        %% Switch to the right column. This will now automatically move to the second
-        %% page if the content is too long.
+        % Переход в правую колонку
         \switchcolumn
 
 
         % % % % % % Вторая колонка (правая) % % % % % %
 
-        \funcAboutPrint
+        \funcAboutPrint             % Секция: О себе
 
-        \funcPhilosophyPrint
+        \funcAchievementsPrint      % Секция: Выдающиеся достижения
 
+        \funcSkillsPrint            % Секция: Навыки
 
+        \funcEducationPrint         % Секция: Образование
 
-        \funcAchievementsPrint
-
-        \funcSkillsPrint
-
-        \funcLanguagesPrint
+        \funcLanguagesPrint         % Секция: Владение языками
 
 
 
@@ -139,6 +123,7 @@
         % ---------------------------------------------------------------------------------------- %
         % Есть но не используется
 
+        % \funcPhilosophyPrint        % Цитата
         % \funcDayPrint               % Диаграмма дня
         % \funcProjectsPrint          % Проекты
         % \funcPubsPrint              % Публикации
