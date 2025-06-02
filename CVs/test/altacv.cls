@@ -138,7 +138,7 @@
 \newcommand{\divider}{
   \vspace{-\parskip}%
   \par\vspace{0.25ex}%
-  \noindent\textcolor{body!30}{\hdashrule{\linewidth}{0.6pt}{0.5ex}}%
+  \noindent\textcolor{body!50}{\hdashrule{\linewidth}{0.6pt}{0.5ex}}%
   \vspace{0.25ex}\par
 }
 
@@ -410,6 +410,13 @@
   \end{tabularx}%
   \smallskip
 }
+
+\newcommand{\cvlanguage}[2]{%
+    \smallskip
+    {#1 -- #2}\par
+    \smallskip
+}
+
 
 \newcommand{\cvtag}[1]{%
   \tikz[baseline]\node[anchor=base,draw=body!30,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.5ex,text depth=.25ex]{#1};
