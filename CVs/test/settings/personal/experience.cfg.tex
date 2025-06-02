@@ -19,43 +19,59 @@
 % Описание рода деятельности компании, к которому я причастен
 \newcommand{\funcExperienceAboutCompany}[1]
 {
+    \smallskip
+    \noindent
     \textit{#1}
-
     \smallskip
 }
 
-% ------------------------------------------------------------------------------------------------ %
-
-%
-\newcommand{\funcExperienceTtmDefinition}
+\newcommand{\funcExperiencePS}[1]
 {
-    В рамках проекта \href{\varExperienceJobUrlTtmMnt}{\underline{навигационного терминала}} для
-    общественного транспорта разработка Linux сервисов, взаимодействующих по шине ZeroMQ
-    посредством Protobuf.
+    #1
+    \smallskip
 }
 
 
 % ------------------------------------------------------------------------------------------------ %
 
-%
-\newcommand{\funcExperienceTtmMiddle}
+% СЦ ТТМ
+\newcommand{\funcExperienceTtm}
 {
-    \cvevent
-        {Middle C/C++ developer}
+    % -------------------------------------------------------------------------------------------- %
+    %   Тут идет разбиение компании на 2 должности отдельными функциями, входящими внутрь функции
+    %   \cvexperience.
+    %
+    %   Сделано это для того, чтобы показать изменение должности, но не дублировать компанию и
+    %   описание ее деятельности.
+    % -------------------------------------------------------------------------------------------- %
+
+
+    \cvexperienceCompanyLocation
         {
             \href
                 {\varExperienceJobUrlTtm}
                 {Сервисный центр Транстелематика}
         }
-        {Апрель 2023 -- \textbf{сейчас} (2 года 2 месяца)}       % Сейчас = июнь 2025
         {г. Саратов}
 
     % Описание рода деятельности компании, к которому я причастен
     \funcExperienceAboutCompany
     {
-        \funcExperienceTtmDefinition
+        В рамках проекта \href{\varExperienceJobUrlTtmMnt}{\underline{навигационного терминала}}
+        для общественного транспорта разработка Linux сервисов, взаимодействующих по шине ZeroMQ
+        посредством Protobuf.
     }
 
+    % -------------------------------------------------------------------------------------------- %
+    % Middle C/C++ developer
+
+    \cvexperiencePosition
+        {Middle C/C++ developer}
+
+    \cvexperiencePeriod
+        {Апрель 2023 -- \textbf{сейчас} (2 года 2 месяца)}       % Сейчас = июнь 2025
+
+    \smallskip
     \begin{itemize}
 
         \item
@@ -73,15 +89,40 @@
 
     \end{itemize}
 
+    % -------------------------------------------------------------------------------------------- %
+    % Junior C/C++ developer
+
+    \cvexperiencePosition
+            {Junior C/C++ developer}
+
+    \cvexperiencePeriod
+        {Октябрь 2021 -- Апрель 2023 (1 год 6 месяцев)}
+
+    \smallskip
+    \begin{itemize}
+
+        \item
+            Переписал сервис информирования пассажиров с ограниченными возможностями
+            с QT на C++14 с использованием modbus (RS-485). Покрыл Unit-тестами.
+
+        \item
+            Переписал с использованием TDD многопоточный сервис обновления контента ТС с QT на
+            C++14. Реализовал алгоритм HTTP скачивания контента по чанкам для условий плохого GSM
+            соединения.
+
+    \end{itemize}
+
+    % -------------------------------------------------------------------------------------------- %
+
     \funcExperienceTechnology
     {
-        C++14, C++17, Python,                                       % Языки
-        STL, boost,                                                 % Фреймворки
-        CMake,                                                      % Сборка
-        Protobuf, ZeroMQ, HTTP, RS485, Ethernet, FTP, JsonRPC       % Протоколы
+        C++14, C++17, Python,                                           % Языки
+        STL, boost, GTest, QT,                                          % Фреймворки
+        CMake,                                                          % Сборка
+        Protobuf, ZeroMQ, HTTP, RS485, Ethernet, FTP, JsonRPC, modbus,  % Протоколы
         sqlite,
-        Git,
-        Bash, Linux.                                                % Окружение
+        Git,                                                            % СКВ
+        Bash, Linux.                                                    % Окружение
     }
 }
 
@@ -91,12 +132,12 @@
 % СГУ - Грант
 \newcommand{\funcExperienceSsu}
 {
-    \cvevent
+    \cvexperience
         {C++ developer}
         {
             \href
                 {\varExperienceJobUrlSsu}
-                {Саратовский государственный университет им. Н.Г. Чернышевского}
+                {СГУ им. Н.Г. Чернышевского}
         }
         {Январь 2023 -- Январь 2025 (2 года)}
         {г. Саратов}
@@ -104,8 +145,8 @@
     % Описание рода деятельности компании, к которому я причастен
     \funcExperienceAboutCompany
     {
-        Разработка в рамках научного гранта приложения по решению диф. ур., описывающей поведение
-        графена в электрическом поле.
+        Разработка в рамках научного гранта приложения по решению системы диф. ур., описывающей
+        поведение графена в электрическом поле.
     }
 
     \begin{itemize}
@@ -120,7 +161,11 @@
 
     \end{itemize}
 
-    Приложение запускалось на 256 ядрах кластера и обладало системой мониторинга производительности.
+    \funcExperiencePS
+    {
+        Приложение запускалось на 256 ядрах кластера и обладало системой мониторинга
+        производительности.
+    }
 
     \funcExperienceTechnology
     {
@@ -154,18 +199,7 @@
         \funcExperienceTtmDefinition
     }
 
-    \begin{itemize}
 
-        \item
-            Переписал сервис информирования пассажиров с ограниченными возможностями
-            с QT на C++14 с использованием modbus (RS-485). Покрыл Unit-тестами.
-
-        \item
-            Переписал с использованием TDD многопоточный сервис обновления контента ТС с QT на
-            C++14. Реализовал алгоритм HTTP скачивания контента по чанкам для условий плохого GSM
-            соединения.
-
-    \end{itemize}
 
     \funcExperienceTechnology
     {
@@ -184,7 +218,7 @@
 % СЭЗ Орджоникидзе
 \newcommand{\funcExperienceSez}
 {
-    \cvevent
+    \cvexperience
         {Junior C/C++ developer}
         {
             \href
@@ -242,15 +276,11 @@
     % В itemize перечисляются задачи/успехи
 
 
-    \funcExperienceTtmMiddle    % Middle C/C++ developer в СЦ ТТМ
+    \funcExperienceTtm          % Middle C/C++ developer в СЦ ТТМ
 
     \divider
 
     \funcExperienceSsu          % C++ developer в СГУ
-
-    \divider
-
-    \funcExperienceTtmJunior    % Junior C/C++ developer в СЦ ТТМ
 
     \divider
 

@@ -131,7 +131,16 @@
 \RequirePackage{changepage}
 
 \setlength{\parindent}{0pt}
-\newcommand{\divider}{\textcolor{body!30}{\hdashrule{\linewidth}{0.6pt}{0.5ex}}\medskip}
+\setlength{\parskip}{0pt}
+
+% \newcommand{\divider}{\textcolor{body!30}{\hdashrule{\linewidth}{0.6pt}{0.5ex}}\medskip}
+
+\newcommand{\divider}{
+  \vspace{-\parskip}%
+  \par\vspace{0.25ex}%
+  \noindent\textcolor{body!30}{\hdashrule{\linewidth}{0.6pt}{0.5ex}}%
+  \vspace{0.25ex}\par
+}
 
 \newenvironment{fullwidth}{%
   \begin{adjustwidth}{}{\dimexpr-\marginparwidth-\marginparsep\relax}}
@@ -287,6 +296,8 @@
 \newcommand{\cvsectionfont}{\LARGE\bfseries}
 \newcommand{\cvsubsectionfont}{\large\bfseries}
 
+\newcommand{\cvdeviderskip}{\medskip}
+
 \newcommand{\makecvheader}
 {%
     \begingroup
@@ -314,7 +325,8 @@
 
 \newcommand{\cvsubsection}[1]{%
   \smallskip%
-  {\color{subheading}\cvsubsectionfont{#1}\par}\medskip
+  {\color{subheading}\cvsubsectionfont{#1}\par}
+  \medskip
 }
 
 % v1.1.4: fixes inconsistent font size
@@ -336,6 +348,58 @@
         ~#4}%
     }}\par
   \medskip\normalsize
+}
+
+%
+\newcommand{\cvexperienceCompanyLocation}[2]{%
+    \noindent
+    \ifboolexpr{ not test {\ifstrequal{#1}{}} or not test {\ifstrequal{#2}{}} }{% Если #1 или #2 не пустые
+        \noindent
+        \makebox[\linewidth][l]{%
+            \ifstrequal{#1}{}{}{%
+                \parbox[c][\height][c]{0.7\linewidth}{%
+                    {\normalsize\textbf{\color{accent}#1}}%
+                }%
+            }%
+            \ifstrequal{#2}{}{}{%
+                \parbox[c][\height][c]{0.3\linewidth}{%
+                    {\small
+                        \BeginAccSupp{method=pdfstringdef,ActualText={\locationname:}}\cvLocationMarker\EndAccSupp{}~#2%
+                    }%
+                }%
+            }%
+        }%
+    }{}
+    \par
+    \smallskip  % После компании/города
+}
+
+%
+\newcommand{\cvexperiencePosition}[1]{%
+    \smallskip
+    {\normalsize\textbf{\color{emphasis}#1}\par}
+    \smallskip
+}
+
+%
+\newcommand{\cvexperiencePeriod}[1]{%
+    \smallskip
+    \ifstrequal{#1}{}{}
+    {%
+        {\small\BeginAccSupp{method=pdfstringdef,ActualText={\datename:}}\cvDateMarker\EndAccSupp{}%
+        ~#1}%
+        }\par
+    \smallskip
+}
+
+% Команда исключительно для мест работы
+\newcommand{\cvexperience}[4]{%
+    \smallskip
+    \normalsize
+    \cvexperienceCompanyLocation{#2}{#4}
+    \cvexperiencePosition{#1}
+    \cvexperiencePeriod{#3}
+    \normalsize
 }
 
 % v1.7: adds accsupp for the icon as well
