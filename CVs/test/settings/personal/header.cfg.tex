@@ -10,8 +10,9 @@
 
 \newcommand{\varInfoName}           {Новиков Николай}
 \newcommand{\varInfoPosition}       {Middle C++ developer}
+\newcommand{\varInfoExperience}     {6 лет опыта}
 
-\newcommand{\varInfoEmail}          {novikov.na.work@ya.ru}
+\newcommand{\varInfoEmail}          {novikov.na.work@yandex.ru}
 \newcommand{\varInfoPhone}          {+7(904)243-56-47}
 
 \newcommand{\varInfoTelegramURL}    {https://t.me/}
@@ -23,7 +24,7 @@
 
 \newcommand{\varInfoLocation}       {г. Саратов}
 
-\newcommand{\varInfoPhoto}          {photo/photo_wedding_glass.png}
+\newcommand{\varInfoPhoto}          {photo/9.jpg}
 
 % ------------------------------------------------------------------------------------------------ %
 
@@ -39,11 +40,17 @@
     \tagline{\varInfoPosition}
 }
 
+% Команда-функция вывода опыта
+\newcommand{\funcInfoSetExperience}
+{
+    \experience{\varInfoExperience}
+}
+
 % Команда-функция вывода фотографий по бокам от блока информации со ссылками
 % Могут быть две фотографии - слева и/или справа от блока
 \newcommand{\funcInfoSetPhotos}
 {
-    \photoR{3.0cm}{\varInfoPhoto}  % Правое фото
+    \photoR{3.2cm}{\varInfoPhoto}  % Правое фото
     % \photoL{3.0cm}{\varInfoPhoto}  % Левое фото
 }
 
@@ -107,11 +114,11 @@
         }
         \telegram   {\varInfoTelegramName}
         \github     {\varInfoGithub}
-        \linkedin   {\varInfoLinkedin}
-        \location   {\varInfoLocation}
 
         % Ненужная информация
 
+        % \location   {\varInfoLocation}
+        % \linkedin   {\varInfoLinkedin}
         % \phone      {\varInfoPhone}
         % \orcid      {\varInfoOrcid}
         % \mailaddress{Åddrésş, Street, 00000 Cóuntry}
@@ -127,7 +134,8 @@
 {
     \funcInfoSetName        % Первая строка - имя кандидата
     \funcInfoSetPosition    % Вторая строка - должность(и)
-    % \funcInfoSetPhotos      % Фотографии - могут быть две: слева и/или справа от блока информации
+    \funcInfoSetPhotos      % Фотографии - могут быть две: слева и/или справа от блока информации
+    \funcInfoSetExperience  % Опыт работы
     \funcInfoSetTopBlock    % Блок информации под должностью и именем
 
     \makecvheader           % Функция генерации заголовка: без нее заголовка не будет вообще

@@ -107,6 +107,7 @@
 \colorlet{subheading}{emphasis}
 \colorlet{body}{black!80!white}
 \colorlet{name}{heading}
+\colorlet{experience}{accent}
 \colorlet{tagline}{accent}
 % Renamed or added v1.7
 \newcommand{\cvItemMarker}{{\small\textbullet}}
@@ -221,6 +222,7 @@
 \ExplSyntaxOff
 
 \newcommand{\name}[1]{\def\@name{#1}}
+\newcommand{\experience}[1]{\def\@experience{#1}}
 \newcommand{\tagline}[1]{\def\@tagline{#1}}
 \newcommand{\personalinfo}[1]{\def\@personalinfo{#1}}
 \NewInfoField{email}{\faAt}[mailto:]
@@ -293,6 +295,7 @@
 \newcommand{\namefont}{\Huge\bfseries}
 \newcommand{\taglinefont}{\large\bfseries}
 \newcommand{\personalinfofont}{\footnotesize\bfseries}
+\newcommand{\experiencefont}{\footnotesize}
 \newcommand{\cvsectionfont}{\LARGE\bfseries}
 \newcommand{\cvsubsectionfont}{\large\bfseries}
 
@@ -307,6 +310,8 @@
             {\namefont\color{name}\MakeUppercase{\@name}\par}
             \medskip
             {\taglinefont\color{tagline}\@tagline\par}
+            \smallskip
+            {\experiencefont\@experience\par}
             \medskip
             {\personalinfofont\@personalinfo\par}
         \end{minipage}\hfill%
