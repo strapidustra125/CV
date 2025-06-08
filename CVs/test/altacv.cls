@@ -416,10 +416,11 @@
   \smallskip
 }
 
-\newcommand{\cvlanguage}[2]{%
-    \smallskip
-    {#1 -- #2}\par
-    \smallskip
+\newcommand{\cvtaggedskill}[2]{%
+    \cvtag{#1}
+    \ifstrequal{#2}{}{}{%
+        \textit{-- #2}\par
+    }%
 }
 
 
