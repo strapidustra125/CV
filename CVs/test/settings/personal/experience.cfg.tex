@@ -13,17 +13,19 @@
 
 \newcommand{\funcExperienceTechnology}[1]
 {
-    \textbf{Стек: }
-    \textit{#1}
+    {\textbf{Стек: }
+    \itshape
+    #1}
 }
 
 % Описание рода деятельности компании, к которому я причастен
 \newcommand{\funcExperienceAboutCompany}[1]
 {
+    {\smallskip
+    \itshape
+    #1
     \smallskip
-    \noindent
-    \textit{#1}
-    \smallskip
+    \par}
 }
 
 \newcommand{\funcExperiencePS}[1]
@@ -59,25 +61,21 @@
     \funcExperienceAboutCompany
     {
         В рамках проекта \href{\varExperienceJobUrlTtmMnt}{\underline{навигационного терминала}}
-        для общественного транспорта разработка Linux сервисов, взаимодействующих по шине ZeroMQ
-        посредством Protobuf.
+        для общественного транспорта разработка и поддержка Linux сервисов, взаимодействующих по
+        шине ZeroMQ посредством Protobuf.
     }
 
     % -------------------------------------------------------------------------------------------- %
-    % Middle C/C++ developer
+    % Senior C/C++ developer
 
     \cvexperiencePosition
-        {Middle C/C++ developer}
+        {Senior C/C++ developer}
 
     \cvexperiencePeriod
-        {Апрель 2023 -- \textbf{сейчас} (2 года 2 месяца)}       % Сейчас = июнь 2025
+        {Сентябрь 2024 -- \textbf{сейчас} (9 месяцев)}       % Сейчас = июнь 2025
 
     \smallskip
     \begin{itemize}
-
-        \item
-            Разработал для сервиса информирования пассажиров с ограниченными возможностями
-            взаимодействие с устройствами радио информаторов по Ethernet с использованием Protobuf.
 
         \item
             Разработал для сервиса обновления контента ТС режим master-slave-slave для 3-х
@@ -87,6 +85,28 @@
         \item
             Разработал для сервиса мониторинга оплаты проезда взаимодействие c валидаторами ТС по
             протоколу JsonRPC с использованием sqlite БД.
+
+    \end{itemize}
+
+    % -------------------------------------------------------------------------------------------- %
+    % Middle C/C++ developer
+
+    \cvexperiencePosition
+        {Middle C/C++ developer}
+
+    \cvexperiencePeriod
+        {Апрель 2023 -- Сентябрь 2024 (1 год 5 месяцев)}
+
+    \smallskip
+    \begin{itemize}
+
+        \item
+            Разработал для сервиса информирования пассажиров с ограниченными возможностями
+            взаимодействие с устройствами радио информаторов по Ethernet с использованием Protobuf.
+
+        \item
+            Покрыл Unit-тестами \textit{(GTest/GMock)} и документировал \textit{(Doxygen/UML)}
+            2 сервиса.
 
     \end{itemize}
 
@@ -104,7 +124,7 @@
 
         \item
             Переписал сервис информирования пассажиров с ограниченными возможностями
-            с QT на C++14 с использованием modbus (RS-485). Покрыл Unit-тестами.
+            с QT на C++14 с использованием modbus (RS-485).
 
         \item
             Переписал с использованием TDD многопоточный сервис обновления контента ТС с QT на
@@ -243,12 +263,13 @@
 
     \funcExperienceTtm          % Middle C/C++ developer в СЦ ТТМ
 
-    \divider
+
+
+    \newpage
 
     \funcExperienceSsu          % C++ developer в СГУ
 
     \divider
-    \newpage
 
     \funcExperienceSez          % Junior C/C++ developer на СЭЗ
 }

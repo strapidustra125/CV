@@ -100,15 +100,25 @@
 }
 \fi
 
-\colorlet{accent}{blue!70!black}
-\colorlet{emphasis}{black}
-\colorlet{heading}{black}
-\colorlet{headingrule}{black}
-\colorlet{subheading}{emphasis}
-\colorlet{body}{black!80!white}
-\colorlet{name}{heading}
-\colorlet{experience}{accent}
-\colorlet{tagline}{accent}
+% ------------------------------------------------------------------------------------------------ %
+% Цвета
+
+\colorlet{accent}           {blue!70!black}
+\colorlet{emphasis}         {black}
+\colorlet{heading}          {black}
+\colorlet{headingrule}      {black}
+\colorlet{subheading}       {emphasis}
+\colorlet{name}             {heading}
+\colorlet{tagline}          {accent}
+\colorlet{experience}       {accent}
+\colorlet{body}             {black!80!white}
+\colorlet{periods}          {black!80!white}
+\colorlet{position}         {black}
+
+
+
+
+
 % Renamed or added v1.7
 \newcommand{\cvItemMarker}{{\small\textbullet}}
 \newcommand{\cvRatingMarker}{\faCircle}
@@ -292,12 +302,18 @@
 }
 \let\photo\photoR
 
-\newcommand{\namefont}{\Huge\bfseries}
-\newcommand{\taglinefont}{\large\bfseries}
-\newcommand{\personalinfofont}{\footnotesize\bfseries}
-\newcommand{\experiencefont}{\footnotesize}
-\newcommand{\cvsectionfont}{\LARGE\bfseries}
-\newcommand{\cvsubsectionfont}{\large\bfseries}
+
+% ------------------------------------------------------------------------------------------------ %
+% Настройки шрифтов для элементов резюме
+
+\newcommand{\cvfontName}                {\Huge\bfseries}
+\newcommand{\cvfontTagline}             {\large\bfseries}
+\newcommand{\cvfontPersonalinfo}        {\footnotesize\bfseries}
+\newcommand{\cvfontGeneralExperience}   {\footnotesize}
+\newcommand{\cvfontSection}             {\LARGE\bfseries}
+\newcommand{\cvfontSubsection}          {\large\bfseries}
+\newcommand{\cvfontDatePeriod}          {\small}
+\newcommand{\cvfontPosition}            {\textbf}
 
 \newcommand{\cvdeviderskip}{\medskip}
 
@@ -307,13 +323,13 @@
         \altacv@left@photos\hfill%
         \begin{minipage}{\dimexpr\linewidth-\altacv@photos@width}%
             \raggedright%
-            {\namefont\color{name}\MakeUppercase{\@name}\par}
+            {\cvfontName\color{name}\MakeUppercase{\@name}\par}
             \medskip
-            {\taglinefont\color{tagline}\@tagline\par}
+            {\cvfontTagline\color{tagline}\@tagline\par}
             \smallskip
-            {\experiencefont\@experience\par}
+            {\cvfontGeneralExperience\@experience\par}
             \medskip
-            {\personalinfofont\@personalinfo\par}
+            {\cvfontPersonalinfo\@personalinfo\par}
         \end{minipage}\hfill%
         \altacv@right@photos\par%
     \endgroup\smallskip
@@ -324,13 +340,13 @@
 \newcommand{\cvsection}[2][]{%
   \nointerlineskip\bigskip%  %% bugfix in v1.6.2
   \ifstrequal{#1}{}{}{\marginpar{\vspace*{\dimexpr1pt-\baselineskip}\raggedright\input{#1}}}%
-  {\color{heading}\cvsectionfont\MakeUppercase{#2}}\\[-1ex]%
+  {\color{heading}\cvfontSection\MakeUppercase{#2}}\\[-1ex]%
   {\color{headingrule}\rule{\linewidth}{2pt}\par}\medskip
 }
 
 \newcommand{\cvsubsection}[1]{%
   \smallskip%
-  {\color{subheading}\cvsubsectionfont{#1}\par}
+  {\color{subheading}\cvfontSubsection{#1}\par}
   \medskip
 }
 
@@ -343,12 +359,12 @@
   \textbf{\color{accent}#2}\par
   \smallskip}
   \ifstrequal{#3}{}{}{%
-    {\small\makebox[0.7\linewidth][l]%
+    {\cvfontDatePeriod\color{periods}\makebox[0.7\linewidth][l]%
       {\BeginAccSupp{method=pdfstringdef,ActualText={\datename:}}\cvDateMarker\EndAccSupp{}%
       ~#3}%
     }}%
   \ifstrequal{#4}{}{}{%
-    {\small\makebox[0.3\linewidth][l]%
+    {\cvfontDatePeriod\color{periods}\makebox[0.3\linewidth][l]%
       {\BeginAccSupp{method=pdfstringdef,ActualText={\locationname:}}\cvLocationMarker\EndAccSupp{}%
         ~#4}%
     }}\par
@@ -377,12 +393,13 @@
     }{}
     \par
     \smallskip  % После компании/города
+    \par
 }
 
 %
 \newcommand{\cvexperiencePosition}[1]{%
     \smallskip
-    {\normalsize\textbf{\color{emphasis}#1}\par}
+    {\cvfontPosition{\color{position}#1}\par}
     \smallskip
 }
 
@@ -391,7 +408,7 @@
     \smallskip
     \ifstrequal{#1}{}{}
     {%
-        {\small\BeginAccSupp{method=pdfstringdef,ActualText={\datename:}}\cvDateMarker\EndAccSupp{}%
+        {\cvfontDatePeriod\color{periods}\BeginAccSupp{method=pdfstringdef,ActualText={\datename:}}\cvDateMarker\EndAccSupp{}%
         ~#1}%
         }\par
     \smallskip
@@ -419,13 +436,24 @@
 \newcommand{\cvtaggedskill}[2]{%
     \cvtag{#1}
     \ifstrequal{#2}{}{}{%
-        \textit{-- #2}\par
+        \textit{ -- #2}\par
     }%
 }
 
 
 \newcommand{\cvtag}[1]{%
-  \tikz[baseline]\node[anchor=base,draw=body!30,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.5ex,text depth=.25ex]{#1};
+    \tikz[baseline]
+    \node[
+        anchor          = base,
+        draw            = body!30,
+        inner xsep      = 0.75ex,       % внутренний горизонтальный отступ от текста до рамки
+        inner ysep      = 0.5ex,        % внутренний вертикальный отступ от текста до рамки
+        text height     = 1.5ex,
+        text depth      = 0.25ex,
+        rounded corners
+    ]
+    {#1};
+    \hspace{-0.8em}                     % сократить отступ после блока
 }
 
 % v1.6: Use accsupp so that the actual numeric value is copied/pasted
