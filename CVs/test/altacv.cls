@@ -108,6 +108,7 @@
 \colorlet{heading}          {black}
 \colorlet{headingrule}      {black}
 \colorlet{subheading}       {emphasis}
+
 \colorlet{name}             {heading}
 \colorlet{tagline}          {accent}
 \colorlet{experience}       {accent}
@@ -115,6 +116,8 @@
 \colorlet{periods}          {black!80!white}
 \colorlet{position}         {black}
 
+\colorlet{calendarMarker}   {black}
+\colorlet{locationMarker}   {black}
 
 
 
@@ -353,22 +356,30 @@
 % v1.1.4: fixes inconsistent font size
 % v1.7: adds accsupp ActualText for location and date markers
 \newcommand{\cvevent}[4]{%
-  {\large\color{emphasis}#1\par}
-  \smallskip\normalsize
-  \ifstrequal{#2}{}{}{
-  \textbf{\color{accent}#2}\par
-  \smallskip}
-  \ifstrequal{#3}{}{}{%
-    {\cvfontDatePeriod\color{periods}\makebox[0.7\linewidth][l]%
-      {\BeginAccSupp{method=pdfstringdef,ActualText={\datename:}}\cvDateMarker\EndAccSupp{}%
-      ~#3}%
-    }}%
-  \ifstrequal{#4}{}{}{%
-    {\cvfontDatePeriod\color{periods}\makebox[0.3\linewidth][l]%
-      {\BeginAccSupp{method=pdfstringdef,ActualText={\locationname:}}\cvLocationMarker\EndAccSupp{}%
-        ~#4}%
-    }}\par
-  \medskip\normalsize
+    {\large\color{emphasis}#1\par}
+    \smallskip\normalsize
+    \ifstrequal{#2}{}{}{
+    \textbf{\color{accent}#2}\par
+    \smallskip}
+    \ifstrequal{#3}{}{}{%
+        {\cvfontDatePeriod\color{periods}\makebox[0.7\linewidth][l]%
+            {%
+                \BeginAccSupp%
+                {method=pdfstringdef,ActualText={\datename:}}%
+                {\color{calendarMarker}\cvDateMarker}%
+                \EndAccSupp{}%
+                ~#3}%
+        }}%
+    \ifstrequal{#4}{}{}{%
+        {\cvfontDatePeriod\color{periods}\makebox[0.3\linewidth][l]%
+            {%
+                \BeginAccSupp%
+                {method=pdfstringdef,ActualText={\locationname:}}%
+                {\color{locationMarker}\cvLocationMarker}%
+                \EndAccSupp{}%
+                ~#4}%
+        }}\par
+    \medskip\normalsize
 }
 
 %
@@ -384,8 +395,12 @@
             }%
             \ifstrequal{#2}{}{}{%
                 \parbox[c][\height][c]{0.3\linewidth}{%
-                    {\small
-                        \BeginAccSupp{method=pdfstringdef,ActualText={\locationname:}}\cvLocationMarker\EndAccSupp{}~#2%
+                    {%
+                        \cvfontDatePeriod%
+                        \BeginAccSupp%
+                        {method=pdfstringdef,ActualText={\locationname:}}%
+                        {\color{locationMarker}\cvLocationMarker}%
+                        \EndAccSupp{}~#2%
                     }%
                 }%
             }%
@@ -408,8 +423,13 @@
     \smallskip
     \ifstrequal{#1}{}{}
     {%
-        {\cvfontDatePeriod\color{periods}\BeginAccSupp{method=pdfstringdef,ActualText={\datename:}}\cvDateMarker\EndAccSupp{}%
-        ~#1}%
+        {%
+            \cvfontDatePeriod%
+            \color{periods}%
+            \BeginAccSupp{method=pdfstringdef,ActualText={\datename:}}%
+            {\color{calendarMarker}\cvDateMarker}%
+            \EndAccSupp{}%
+            ~#1}%
         }\par
     \smallskip
 }
