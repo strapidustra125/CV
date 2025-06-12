@@ -40,6 +40,7 @@
 
 \input{settings/personal/about.cfg.tex}             %
 \input{settings/personal/achievements.cfg.tex}      % Достижения
+\input{settings/personal/additional.cfg.tex}        % Достижения
 \input{settings/personal/day.cfg.tex}               % Диаграмма дня
 \input{settings/personal/education.cfg.tex}         % Образованием
 \input{settings/personal/experience.cfg.tex}        % Опыт работы
@@ -78,7 +79,7 @@
     % Установить соотношение ширины левой и правой колонок
     % 0.6 - левая:правая = 6:4
     % 0.7 - левая:правая = 7:3
-    \columnratio{0.6}
+    \columnratio{0.65}
 
     % Режим двух колонок с авто переносом на следующую страницу для каждой колонки
     \begin{paracol}{2}
@@ -91,22 +92,18 @@
         %   \newpage - переход на новую страницу (для каждой колонки)
 
 
-        % % % % % % Первая колонка (левая) % % % % % %
-
-
         \funcExperiencePrint        % Секция: Опыт работы
 
-        \medskip
+        \funcAdditionalPrint        % Секция: Дополнительно
 
         % Переход в правую колонку
         \switchcolumn
 
-
-        % % % % % % Вторая колонка (правая) % % % % % %
-
         \funcAboutPrint             % Секция: О себе
 
         \funcEducationPrint         % Секция: Образование
+
+        \newpage
 
         \funcSkillsPrint            % Секция: Навыки
 
