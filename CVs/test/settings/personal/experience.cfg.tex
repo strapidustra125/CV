@@ -4,12 +4,133 @@
 %
 % ------------------------------------------------------------------------------------------------ %
 
-\newcommand{\varExperienceJobUrlSez}        {https://zaprib.ru/}
-\newcommand{\varExperienceJobUrlSsu}        {https://www.sgu.ru/}
-\newcommand{\varExperienceJobUrlTtm}        {https://transtelematica.ru/}
-\newcommand{\varExperienceJobUrlTtmMnt}     {https://transtelematica.ru/projects/programmnoe-obespechenie/programmnoe-obespechenie-MNT/}
+\newcommand{\varExperienceJobUrlSez}            {https://zaprib.ru/}
+\newcommand{\varExperienceJobUrlSsu}            {https://www.sgu.ru/}
+\newcommand{\varExperienceJobUrlTtm}            {https://transtelematica.ru/}
+\newcommand{\varExperienceJobUrlTtmMnt}         {https://transtelematica.ru/projects/programmnoe-obespechenie/programmnoe-obespechenie-MNT/}
+
+% Даты работы в формате ГГГГ-ММ-ДД
+
+\newcommand{\varExperienceJobTtmSeniorFinish}   {}
+\newcommand{\varExperienceJobTtmSeniorStart}    {2024-09-01}
+\newcommand{\varExperienceJobTtmMiddleFinish}   {2024-09-01}
+\newcommand{\varExperienceJobTtmMiddleStart}    {2023-04-01}
+\newcommand{\varExperienceJobTtmJuniorFinish}   {2023-04-01}
+\newcommand{\varExperienceJobTtmJuniorStart}    {2021-10-18}
+
+\newcommand{\varExperienceJobSsuFinish}         {2025-01-01}
+\newcommand{\varExperienceJobSsuStart}          {2023-01-01}
+
+\newcommand{\varExperienceJobSezFinish}         {2021-10-18}
+\newcommand{\varExperienceJobSezStart}          {2019-10-25}
+
+% Добавить функцию перевода даты ГГГГ-ММ-ДД в ММММ ГГГГ
 
 
+
+\usepackage{expl3,xparse}
+
+\ExplSyntaxOn
+
+% Склонения лет
+\cs_new:Npn \get_year_word:n #1
+  {
+    \int_case:nnF { \int_mod:nn {#1} {100} }
+      {
+        {11} {лет}
+        {12} {лет}
+        {13} {лет}
+        {14} {лет}
+      }
+      {
+        \int_case:nnF { \int_mod:nn {#1} {10} }
+          {
+            {1} {год}
+            {2} {года}
+            {3} {года}
+            {4} {года}
+          }
+          {лет}
+      }
+  }
+
+% Склонения месяцев
+\cs_new:Npn \get_month_word:n #1
+  {
+    \int_case:nnF { \int_mod:nn {#1} {100} }
+      {
+        {11} {месяцев}
+        {12} {месяцев}
+        {13} {месяцев}
+        {14} {месяцев}
+      }
+      {
+        \int_case:nnF { \int_mod:nn {#1} {10} }
+          {
+            {1} {месяц}
+            {2} {месяца}
+            {3} {месяца}
+            {4} {месяца}
+          }
+          {месяцев}
+      }
+  }
+
+% Главная функция: разность текущей даты и заданной
+\NewDocumentCommand{\datediff}{mmmmmm}
+ {
+   % #1-год1, #2-месяц1, #3-день1
+   % #4-год2, #5-месяц2, #6-день2
+   \int_compare:nNnTF { #4 } < { #1 }
+     { \textbf{Error: Некорректный порядок дат} }
+     {
+       \int_set:Nn \l_tmpa_int { #4 - #1 } % годы
+       \int_set:Nn \l_tmpb_int { #5 - #2 } % месяцы
+
+       \int_compare:nNnTF { \l_tmpb_int } < { 0 }
+         {
+           \int_decr:N \l_tmpa_int
+           \int_add:Nn \l_tmpb_int { 12 }
+         }
+         {}
+
+       % Вывод лет
+       \int_to_arabic:n { \l_tmpa_int }~\get_year_word:n { \l_tmpa_int }
+
+       % Вывод месяцев (только если не 0)
+       \int_compare:nNnF { \l_tmpb_int } = { 0 }
+         {
+           ,~\int_to_arabic:n { \l_tmpb_int }~\get_month_word:n { \l_tmpb_int }
+         }
+     }
+ }
+
+ % Промежуточная обёртка: \datediffstr{1990-12-25}
+\NewDocumentCommand{\datediffstr}{mm}
+ {
+   % Разбираем первую дату
+   \seq_set_split:Nnn \l_tmpa_seq { - } { #1 }
+   \seq_pop_left:NN \l_tmpa_seq \l_tmpa_tl % год1
+   \seq_pop_left:NN \l_tmpa_seq \l_tmpb_tl % месяц1
+   \seq_pop_left:NN \l_tmpa_seq \l_tmpc_tl % день1
+
+   % Разбираем вторую дату
+   \seq_set_split:Nnn \l_tmpb_seq { - } { #2 }
+   \seq_pop_left:NN \l_tmpb_seq \l_tmpd_tl % год2
+   \seq_pop_left:NN \l_tmpb_seq \l_tmpe_tl % месяц2
+   \seq_pop_left:NN \l_tmpb_seq \l_tmpf_tl % день2
+
+   % Вызываем основную функцию с 6 параметрами
+   \datediff
+     { \tl_use:N \l_tmpa_tl }
+     { \tl_use:N \l_tmpb_tl }
+     { \tl_use:N \l_tmpc_tl }
+     { \tl_use:N \l_tmpd_tl }
+     { \tl_use:N \l_tmpe_tl }
+     { \tl_use:N \l_tmpf_tl }
+ }
+
+\ExplSyntaxOff
 
 \newcommand{\funcExperienceTechnology}[1]
 {
