@@ -32,6 +32,57 @@
 
 \ExplSyntaxOn
 
+
+\seq_new:N \g_months_russian_seq
+\seq_set_from_clist:Nn \g_months_russian_seq
+  {Январь,Февраль,Март,Апрель,Май,Июнь,Июль,Август,Сентябрь,Октябрь,Ноябрь,Декабрь}
+
+\NewDocumentCommand{\monthyearfromdate}{m}
+ {
+   \monthyearfromdate:n {#1}
+ }
+
+\cs_new_protected:Npn \monthyearfromdate:n #1
+ {
+   % Если длина не 10 — сразу жирным и без заморочек
+   \int_compare:nNnTF { \str_count:n {#1} } = { 10 }
+     { \monthyearfromdate_try_parse:n {#1} }
+     { \monthyearfromdate_print_bold:n {#1} }
+ }
+
+\cs_new_protected:Npn \monthyearfromdate_try_parse:n #1
+ {
+   % Попытка сплитнуть, без проверки дефисов, просто если не формат — упадём в жирный
+   \seq_set_split:Nnn \l_tmpa_seq { - } { #1 }
+   \int_compare:nNnTF { \seq_count:N \l_tmpa_seq } = { 3 }
+     {
+       \seq_pop_left:NN \l_tmpa_seq \l_tmpa_tl % год
+       \seq_pop_left:NN \l_tmpa_seq \l_tmpb_tl % месяц
+       % Проверяем месяц 1..12
+       \int_set:Nn \l_tmpa_int { \tl_use:N \l_tmpb_tl }
+       \int_compare:nNnTF { \l_tmpa_int } > { 0 }
+         {
+           \int_compare:nNnTF { \l_tmpa_int } < { 13 }
+             { \monthyearfromdate_parse_date:nn { \l_tmpa_tl } { \l_tmpb_tl } }
+             { \monthyearfromdate_print_bold:n {#1} }
+         }
+         { \monthyearfromdate_print_bold:n {#1} }
+     }
+     { \monthyearfromdate_print_bold:n {#1} }
+ }
+
+\cs_new_protected:Npn \monthyearfromdate_parse_date:nn #1 #2
+ {
+   \seq_item:Nn \g_months_russian_seq { \int_eval:n {#2} }~#1
+ }
+
+\cs_new_protected:Npn \monthyearfromdate_print_bold:n #1
+ {
+   \textbf{#1}
+ }
+
+% ------------------------------------------------------------------------------------------------ %
+
 % Склонения лет
 \cs_new:Npn \get_year_word:n #1
   {
@@ -108,19 +159,43 @@
  % Промежуточная обёртка: \datediffstr{1990-12-25}
 \NewDocumentCommand{\datediffstr}{mm}
  {
-   % Разбираем первую дату
+   \datediffstr_process:nn {#1} {#2}
+ }
+
+\cs_new_protected:Npn \datediffstr_process:nn #1#2
+ {
+   % Разбираем первую дату (всегда предполагается в формате YYYY-MM-DD)
    \seq_set_split:Nnn \l_tmpa_seq { - } { #1 }
    \seq_pop_left:NN \l_tmpa_seq \l_tmpa_tl % год1
    \seq_pop_left:NN \l_tmpa_seq \l_tmpb_tl % месяц1
    \seq_pop_left:NN \l_tmpa_seq \l_tmpc_tl % день1
 
-   % Разбираем вторую дату
-   \seq_set_split:Nnn \l_tmpb_seq { - } { #2 }
-   \seq_pop_left:NN \l_tmpb_seq \l_tmpd_tl % год2
-   \seq_pop_left:NN \l_tmpb_seq \l_tmpe_tl % месяц2
-   \seq_pop_left:NN \l_tmpb_seq \l_tmpf_tl % день2
+   % Проверяем формат второй даты
+   \str_if_eq:nnTF { \tl_count:n {#2} } {10}
+     {
+       \str_if_eq:nnTF { \tl_item:nn {#2} {5} } {-}
+         {
+           \str_if_eq:nnTF { \tl_item:nn {#2} {8} } {-}
+             {
+               % Всё норм — разбираем вторую дату
+               \seq_set_split:Nnn \l_tmpb_seq { - } { #2 }
+               \seq_pop_left:NN \l_tmpb_seq \l_tmpd_tl % год2
+               \seq_pop_left:NN \l_tmpb_seq \l_tmpe_tl % месяц2
+               \seq_pop_left:NN \l_tmpb_seq \l_tmpf_tl % день2
+             }
+             {
+               \datediffstr_use_today:
+             }
+         }
+         {
+           \datediffstr_use_today:
+         }
+     }
+     {
+       \datediffstr_use_today:
+     }
 
-   % Вызываем основную функцию с 6 параметрами
+   % Вызываем основную функцию
    \datediff
      { \tl_use:N \l_tmpa_tl }
      { \tl_use:N \l_tmpb_tl }
@@ -130,7 +205,17 @@
      { \tl_use:N \l_tmpf_tl }
  }
 
+% Если вторая дата невалидна — подставляем текущую
+\cs_new_protected:Npn \datediffstr_use_today:
+ {
+   \tl_set:Nx \l_tmpd_tl { \int_eval:n { \year } }
+   \tl_set:Nx \l_tmpe_tl { \int_eval:n { \month } }
+   \tl_set:Nx \l_tmpf_tl { \int_eval:n { \day } }
+ }
+
 \ExplSyntaxOff
+
+% ------------------------------------------------------------------------------------------------ %
 
 \newcommand{\funcExperienceTechnology}[1]
 {
@@ -147,6 +232,11 @@
     #1
     \smallskip
     \par}
+}
+
+\newcommand{\funcExperiencePeriod}[2]
+{
+    {\monthyearfromdate{#1} -- \monthyearfromdate{#2}} {(\datediffstr{#1}{#2})}
 }
 
 \newcommand{\funcExperiencePS}[1]
@@ -168,6 +258,11 @@
     %   Сделано это для того, чтобы показать изменение должности, но не дублировать компанию и
     %   описание ее деятельности.
     % -------------------------------------------------------------------------------------------- %
+
+    \funcExperiencePeriod{2021-07-10}{сейчас}
+
+
+
 
 
     \cvexperienceCompanyLocation
